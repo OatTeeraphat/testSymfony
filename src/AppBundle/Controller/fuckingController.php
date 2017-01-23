@@ -12,11 +12,19 @@ use Symfony\Component\HttpFoundation\Response;
 class fuckingController extends Controller
 {
     /**
-     * @Route("/fucking")
+     * @Route("/fucking/{fuckName}")
      */
-    public function fuckingAction()
+    public function fuckingAction($fuckName)
     {
-		return new Response('Fuck the World Symfony');
+    	$fuckReason = ['i','need','you'];
+
+    	$templating = $this->container->get('templating');
+    	$html = $templating->render('/fuck/fucking.html.twig', [
+            'name' => $fuckName,
+            'reason' => $fuckReason
+        ]);
+
+		return new Response($html);
 	}
 
 }
